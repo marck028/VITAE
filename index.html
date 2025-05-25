@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marco Salvatierra - Científico de Datos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0b132b;
+            --secondary: #1c2541;
+            --tertiary: #3a506b;
+            --accent: #5bc0be;
+            --light: #6fffe9;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 60px 0;
+            position: relative;
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            border: 5px solid var(--accent);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+            background: var(--tertiary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: var(--light);
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, var(--accent), var(--light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease;
+        }
+
+        .header .subtitle {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--light);
+            transition: color 0.3s ease;
+        }
+
+        .contact-item:hover {
+            color: var(--accent);
+        }
+
+        .section {
+            background: rgba(28, 37, 65, 0.8);
+            margin: 30px 0;
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(91, 192, 190, 0.2);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+        }
+
+        .section h2 {
+            color: var(--accent);
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(45deg, var(--accent), var(--light));
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            text-align: justify;
+            color: var(--light);
+            margin-bottom: 20px;
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-category h3 {
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .skill-item {
+            margin-bottom: 15px;
+        }
+
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            color: var(--light);
+        }
+
+        .skill-bar {
+            height: 8px;
+            background: var(--tertiary);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(45deg, var(--accent), var(--light));
+            border-radius: 4px;
+            transition: width 2s ease;
+            width: 0;
+        }
+
+        .interests {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .interest-item {
+            background: linear-gradient(45deg, var(--tertiary), var(--accent));
+            padding: 15px 25px;
+            border-radius: 25px;
+            color: white;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .interest-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(91, 192, 190, 0.3);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent), var(--light));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(58, 80, 107, 0.5);
+            border-radius: 15px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -37px;
+            top: 25px;
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 3px solid var(--primary);
+        }
+
+        .timeline-date {
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .timeline-title {
+            color: var(--light);
+            font-size: 1.3rem;
+            margin: 5px 0;
+        }
+
+        .timeline-company {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .timeline-description {
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .section {
+                padding: 30px 20px;
+            }
+        }
+
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: -2s;
+        }
+
+        .shape:nth-child(2) {
+            top: 60%;
+            right: 10%;
+            animation-delay: -4s;
+        }
+
+        .shape:nth-child(3) {
+            bottom: 20%;
+            left: 20%;
+            animation-delay: -1s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-shapes">
+        <div class="shape" style="width: 100px; height: 100px; background: var(--accent); border-radius: 50%;"></div>
+        <div class="shape" style="width: 80px; height: 80px; background: var(--tertiary); border-radius: 20%;"></div>
+        <div class="shape" style="width: 60px; height: 60px; background: var(--light); border-radius: 30%;"></div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="profile-img">
+                Foto Perfil
+            </div>
+            <h1>Marco Salvatierra</h1>
+            <p class="subtitle">Científico de Datos & Especialista en Marketing</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>📧</span>
+                    <span>marcosalvatierra028@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <span>📱</span>
+                    <span>+591 63860980</span>
+                </div>
+                <div class="contact-item">
+                    <span>📍</span>
+                    <span>C. Diego Benavidez entre Av. Los Angeles</span>
+                </div>
+                <div class="contact-item">
+                    <span>🎂</span>
+                    <span>05-07-2002</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Sobre Mí -->
+        <section class="section fade-in">
+            <h2>Sobre Mí</h2>
+            <p class="about-text">
+                Soy un apasionado de la ciencia de datos con 21 años de edad. Mi interés por este campo surge de mi fascinación por el poder transformador de los datos y la tecnología. Me encanta explorar cómo los datos pueden proporcionar insights valiosos y soluciones innovadoras para resolver problemas del mundo real en una amplia gama de industrias.
+            </p>
+            <p class="about-text">
+                Mi pasión radica en el análisis de datos y la capacidad de utilizar esa información para predecir y tomar decisiones informadas. Este campo me brinda la oportunidad de explorar patrones, descubrir insights y crear modelos predictivos que pueden tener un impacto significativo en diversos sectores.
+            </p>
+        </section>
+
+        <!-- Objetivos -->
+        <section class="section fade-in">
+            <h2>Mis Objetivos</h2>
+            <div class="about-text">
+                <p><strong>🎯 Desarrollo Profesional:</strong> Centrarme en el desarrollo profesional en Ciencia de Datos, buscando convertirme en un experto competente en este campo.</p>
+                <br>
+                <p><strong>🍰 Crecimiento en Repostería:</strong> Expandir mi carrera en la industria de la repostería, panadería y pastelería.</p>
+                <br>
+                <p><strong>👨‍💼 Liderazgo:</strong> Alcanzar la excelencia en gestión y liderazgo, aprovechando mis habilidades previas en roles de supervisión.</p>
+                <br>
+                <p><strong>🚀 Contribución Organizacional:</strong> Implementar estrategias que impulsen el crecimiento y la eficiencia de las empresas.</p>
+            </div>
+        </section>
+
+        <!-- Habilidades -->
+        <section class="section fade-in">
+            <h2>Habilidades</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>Habilidades Técnicas</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Python</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="80"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>JAVA</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="80"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Excel</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="80"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>R Studio</span>
+                            <span>78%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="78"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>HTML + CSS</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="75"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Habilidades Profesionales</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Tomar Decisiones</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="90"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Creatividad</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="90"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Trabajo en Equipo</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="85"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Dedicación</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="85"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Comunicación</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="80"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Intereses -->
+        <section class="section fade-in">
+            <h2>Intereses</h2>
+            <div class="interests">
+                <div class="interest-item">🎮 JUEGOS</div>
+                <div class="interest-item">🎵 MÚSICA</div>
+                <div class="interest-item">✈️ VIAJAR</div>
+                <div class="interest-item">🛍️ COMPRAS</div>
+                <div class="interest-item">🔍 INVESTIGAR</div>
+            </div>
+        </section>
+
+        <!-- Educación -->
+        <section class="section fade-in">
+            <h2>Educación</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">2023 - 2026</div>
+                    <div class="timeline-title">Ing. Ciencia de Datos</div>
+                    <div class="timeline-company">Universidad Univalle</div>
+                    <div class="timeline-description">
+                        Explorando conceptos fundamentales en matemáticas, estadísticas, informática y análisis de datos. Trabajando en proyectos prácticos que me permiten aplicar conocimientos teóricos en situaciones del mundo real.
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">2024</div>
+                    <div class="timeline-title">Experto en Desarrollo Web</div>
+                    <div class="timeline-company">Curso Especializado</div>
+                    <div class="timeline-description">
+                        Formación especializada en desarrollo web moderno y tecnologías actuales.
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2024</div>
+                    <div class="timeline-title">API Rest con PHP</div>
+                    <div class="timeline-company">Curso Técnico</div>
+                    <div class="timeline-description">
+                        Especialización en desarrollo de APIs REST utilizando PHP para crear servicios web robustos.
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2021</div>
+                    <div class="timeline-title">Repostería, Panadería y Pastelería</div>
+                    <div class="timeline-company">Chef Educarte</div>
+                    <div class="timeline-description">
+                        Formación integral en técnicas culinarias especializadas en repostería, panadería y pastelería, desde pasteles gourmet hasta panes artesanales.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experiencia Laboral -->
+        <section class="section fade-in">
+            <h2>Experiencia Laboral</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">2024 - 2025</div>
+                    <div class="timeline-title">Encargado del Área de Marketing y ATC</div>
+                    <div class="timeline-company">Empresa Actual</div>
+                    <div class="timeline-description">
+                        Responsable de las estrategias de marketing digital y atención al cliente, implementando soluciones innovadoras para mejorar la experiencia del usuario.
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2022 - 2024</div>
+                    <div class="timeline-title">Encargado de Call Center</div>
+                    <div class="timeline-company">FERCA</div>
+                    <div class="timeline-description">
+                        Supervisión de operaciones diarias del call center, gestión de horarios y turnos, formación del equipo en técnicas de atención al cliente, e implementación de políticas para garantizar un servicio de alta calidad.
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2021 - 2022</div>
+                    <div class="timeline-title">Encargado de Sucursal</div>
+                    <div class="timeline-company">Panchita</div>
+                    <div class="timeline-description">
+                        Liderazgo de operaciones diarias de sucursal, asegurando servicio excepcional al cliente y cumplimiento de objetivos comerciales de la empresa.
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2020</div>
+                    <div class="timeline-title">Administrador de Fábrica de Costura</div>
+                    <div class="timeline-company">Tejidos</div>
+                    <div class="timeline-description">
+                        Supervisión y coordinación de operaciones diarias de fábrica, gestión del personal de producción, asignación de tareas y programación de horarios para garantizar producción eficiente.
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2020</div>
+                    <div class="timeline-title">Encargado de Ventas</div>
+                    <div class="timeline-company">Bata</div>
+                    <div class="timeline-description">
+                        Liderazgo y supervisión de operaciones de ventas en tienda, garantizando servicio excepcional al cliente y cumplimiento de objetivos de ventas establecidos.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Animación de entrada para elementos
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Animación de barras de habilidades
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progressBars = entry.target.querySelectorAll('.skill-progress');
+                    progressBars.forEach(bar => {
+                        const width = bar.getAttribute('data-width');
+                        setTimeout(() => {
+                            bar.style.width = width + '%';
+                        }, 300);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.skills-container').forEach(el => {
+            skillObserver.observe(el);
+        });
+
+        // Efectos de hover y scroll suaves
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
